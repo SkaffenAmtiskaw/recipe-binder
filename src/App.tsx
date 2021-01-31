@@ -43,7 +43,7 @@ const App = () => {
               <Add user={user} recipes={recipes} />
             </Route>
             <Route path="/view/:id">
-              <Recipe recipes={recipes} />
+              <Recipe user={user} recipes={recipes} />
             </Route>
             <Route path="*">
               <List recipes={recipes} />

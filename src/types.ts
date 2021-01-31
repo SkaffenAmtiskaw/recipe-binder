@@ -14,6 +14,7 @@ export type Recipe = {
     prep?: string,
     cook?: string,
     total?: string,
+    actual?: string,
   }
   title: string,
 };

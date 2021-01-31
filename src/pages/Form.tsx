@@ -76,10 +76,21 @@ const Form: FunctionComponent<Props> = ({ value, onChange, onSubmit }) => {
           flex={1}
           description="Total"
           label=""
+          marginRight={majorScale(1)}
           name="recipe-total-time"
           value={get(value, 'time.total', '')}
           onChange={(e: FormEvent<HTMLInputElement>) => {
             onChange({ ...value.time, total: e.currentTarget.value }, 'time')
+          }}
+        />
+        <TextInputField
+          flex={1}
+          description="Actual"
+          label=""
+          name="recipe-actual-time"
+          value={get(value, 'time.actual', '')}
+          onChange={(e: FormEvent<HTMLInputElement>) => {
+            onChange({ ...value.time, actual: e.currentTarget.value }, 'time')
           }}
         />
       </Pane>
@@ -119,7 +130,7 @@ const Form: FunctionComponent<Props> = ({ value, onChange, onSubmit }) => {
           <TagInput
             options={tags}
             value={value.tags}
-            onChange={(tags) => onChange(tags, 'tags')}
+            onChange={(array) => onChange(array, 'tags')}
           />
         )}
       </TagContext.Consumer>

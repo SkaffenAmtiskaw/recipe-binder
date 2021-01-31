@@ -47,7 +47,6 @@ const Add: FunctionComponent<Props> = ({ recipes, user }) => {
     setValue(value);
   }
 
-
   return (
     <Pane>
       <Heading marginBottom={majorScale(1)}>Add Recipe</Heading>
