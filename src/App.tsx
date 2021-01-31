@@ -19,8 +19,11 @@ const App = () => {
 
   useEffect(() => {
     const unsubscribe = db.collection('users').where('name', '==', name).onSnapshot((snapshot) => {
-      setUser(snapshot.docs[0].id);
-      setRecipes(snapshot.docs[0].data().recipes);
+      if (snapshot.docs.length) {
+        setUser(snapshot.docs[0].id);
+        setRecipes(snapshot.docs[0].data().recipes);
+      }
+
     }, (err) => {
       console.log(err);
     });

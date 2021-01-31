@@ -10,5 +10,10 @@ export type Recipe = {
   },
   storage: string,
   tags: string[],
+  time: {
+    prep?: string,
+    cook?: string,
+    total?: string,
+  }
   title: string,
 };

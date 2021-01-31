@@ -30,7 +30,10 @@ const TagInput: FunctionComponent<Props> = ({ options, value, onChange}) => {
               separator=" "
               values={value}
               width="100%"
-              onChange={(value) => onChange(value)}
+              onChange={(value) => {
+                onChange(value);
+                setInput('');
+              }}
               onInputChange={(e) => {
                 onInputChange(e);
                 const element = e.currentTarget as HTMLInputElement;

@@ -49,6 +49,40 @@ const Form: FunctionComponent<Props> = ({ value, onChange, onSubmit }) => {
           }}
         />
       </Pane>
+      <Pane display="flex" alignItems="flex-end">
+        <TextInputField
+          flex={1}
+          description="Prep"
+          label="Time"
+          marginRight={majorScale(1)}
+          name="recipe-prep-time"
+          value={get(value, 'time.prep', '')}
+          onChange={(e: FormEvent<HTMLInputElement>) => {
+            onChange({ ...value.time, prep: e.currentTarget.value }, 'time')
+          }}
+        />
+        <TextInputField
+          flex={1}
+          description="Cook"
+          label=""
+          marginRight={majorScale(1)}
+          name="recipe-cook-time"
+          value={get(value, 'time.cook', '')}
+          onChange={(e: FormEvent<HTMLInputElement>) => {
+            onChange({ ...value.time, cook: e.currentTarget.value }, 'time')
+          }}
+        />
+        <TextInputField
+          flex={1}
+          description="Total"
+          label=""
+          name="recipe-total-time"
+          value={get(value, 'time.total', '')}
+          onChange={(e: FormEvent<HTMLInputElement>) => {
+            onChange({ ...value.time, total: e.currentTarget.value }, 'time')
+          }}
+        />
+      </Pane>
       <TextInputField
         label="Servings"
         name="recipe-servings"
@@ -94,6 +128,14 @@ const Form: FunctionComponent<Props> = ({ value, onChange, onSubmit }) => {
         marginTop={majorScale(2)}
         type="submit"
         onClick={(e: FormEvent<HTMLButtonElement>) => {
+          /**
+           * Prevent the recipe from not being added if the value is undefined. If there are more possible
+           * undefined values this can be changed to a forEach on Object.keys
+           */
+          if (!value.servings) {
+            delete value.servings;
+          }
+
           e.preventDefault();
           onSubmit(value);
         }}

@@ -1,4 +1,5 @@
 import React, { FunctionComponent, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Heading, Pane, majorScale } from 'evergreen-ui';
 import { paramCase } from 'param-case';
 
@@ -12,7 +13,7 @@ type Props = {
   user: string,
 };
 
-export type Type = 'ingredients' | 'instructions' | 'notes' | 'servings' | 'source' | 'storage' | 'tags' | 'title';
+export type Type = 'ingredients' | 'instructions' | 'notes' | 'servings' | 'source' | 'storage' | 'tags' | 'time' | 'title';
 
 const Add: FunctionComponent<Props> = ({ recipes, user }) => {
   const [ingredients, setIngredients] = useState<string[]>([]);
@@ -22,9 +23,12 @@ const Add: FunctionComponent<Props> = ({ recipes, user }) => {
   const [source, setSource] = useState<{ name?: string, url?: string }>({});
   const [storage, setStorage] = useState<string>('');
   const [tags, setTags] = useState<string[]>([]);
+  const [time, setTime] = useState<{ prep?: string, cook?: string, total?: string }>({});
   const [title, setTitle] = useState<string>('');
 
-  const value = { id: paramCase(title), ingredients, instructions, notes, servings, source, storage, tags, title };
+  const history = useHistory();
+
+  const value = { id: paramCase(title), ingredients, instructions, notes, servings, source, storage, tags, time, title };
 
   const onChange: (value: any, type: Type) => void = (value, type) => {
     const changeMethods = {
@@ -35,6 +39,7 @@ const Add: FunctionComponent<Props> = ({ recipes, user }) => {
       source: setSource,
       storage: setStorage,
       tags: setTags,
+      time: setTime,
       title: setTitle,
     };
 
@@ -52,7 +57,8 @@ const Add: FunctionComponent<Props> = ({ recipes, user }) => {
         onSubmit={(data) => {
           db.collection('users')
             .doc(user)
-            .set({ recipes: { ...recipes, [paramCase(data.title)]: data }})
+            .update({ recipes: [...recipes, { ...data, id: paramCase(data.title) }] })
+          history.push('/list');
         }}
       />
     </Pane>
