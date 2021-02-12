@@ -1,10 +1,11 @@
 import React, { FunctionComponent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Heading, Pane, majorScale } from 'evergreen-ui';
+import { BackButton, Heading, majorScale } from 'evergreen-ui';
 import { paramCase } from 'param-case';
 
 import Form from './Form';
 
+import { Layout } from '../components';
 import { Recipe } from '../types';
 import db from '../firebase';
 
@@ -48,7 +49,7 @@ const Add: FunctionComponent<Props> = ({ recipes, user }) => {
   }
 
   return (
-    <Pane>
+    <Layout header={<BackButton onClick={() => history.goBack()} />}>
       <Heading marginBottom={majorScale(1)}>Add Recipe</Heading>
       <Form
         value={value}
@@ -60,7 +61,7 @@ const Add: FunctionComponent<Props> = ({ recipes, user }) => {
           history.push('/list');
         }}
       />
-    </Pane>
+    </Layout>
   );
 }
 
