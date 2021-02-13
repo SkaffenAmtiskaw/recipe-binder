@@ -9,6 +9,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## [Unreleased]
 
 ### Added
+- Alphabetized recipes and tags on the list page.
+- Added filtering by tags to the list page.
 
 ### Changed
 - Updated headers on all pages to have page-specific content.
