@@ -9,6 +9,19 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Removed
+
+### Deprecated
+
+### Fixed
+---
+
+## [1.1.0] 2021-02-13
+
+### Added
 - Alphabetized recipes and tags on the list page.
 - Added filtering by tags to the list page.
 - Added searching by title and ingredient to list page.
