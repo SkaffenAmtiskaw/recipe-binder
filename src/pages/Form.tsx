@@ -2,8 +2,7 @@ import React, { FormEvent, FunctionComponent } from 'react';
 import { Button, Pane, TextareaField, TextInputField, majorScale } from 'evergreen-ui';
 import { get } from 'dot-prop';
 
-import ListInput from '../components/ListInput';
-import TagInput from '../components/TagInput';
+import { ListInput, TagInput } from '../components';
 import { TagContext } from '../App';
 
 import { Recipe } from '../types';
@@ -128,6 +127,7 @@ const Form: FunctionComponent<Props> = ({ value, onChange, onSubmit }) => {
       <TagContext.Consumer>
         {(tags) => (
           <TagInput
+            label="Tags"
             options={tags}
             value={value.tags}
             onChange={(array) => onChange(array, 'tags')}

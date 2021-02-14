@@ -1,10 +1,27 @@
 import React, { FormEvent, FunctionComponent, KeyboardEvent, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Badge, Heading, Link, ListItem, OrderedList, Pane, Paragraph, Strong, Text, TextInput, Textarea, TimeIcon, UnorderedList, majorScale, minorScale } from 'evergreen-ui';
+import { useHistory, useParams } from 'react-router-dom';
+import {
+  BackButton,
+  Badge,
+  Heading,
+  Link,
+  ListItem,
+  OrderedList,
+  Pane,
+  Paragraph,
+  Strong,
+  Text,
+  TextInput,
+  Textarea,
+  TimeIcon,
+  UnorderedList,
+  majorScale,
+  minorScale,
+} from 'evergreen-ui';
 import { get } from 'dot-prop';
 
 import { TagContext } from '../App';
-import TagInput from '../components/TagInput';
+import { Layout, TagInput } from '../components';
 import db from '../firebase';
 import { Recipe as RecipeType } from '../types';
 
@@ -38,8 +55,12 @@ const Recipe: FunctionComponent<Props> = ({ recipes, user }) => {
 
   }
 
+  const history = useHistory();
+
   return (
-    <>
+    <Layout header={(
+      <BackButton onClick={() => history.goBack()} />
+    )}>
       <Heading is="h1">{get(recipe, 'title', '')}</Heading>
       {Object.keys(get(recipe, 'source', {})).length && (
         <Heading size={200}>
@@ -132,7 +153,7 @@ const Recipe: FunctionComponent<Props> = ({ recipes, user }) => {
           />
         )}
       </TagContext.Consumer>
-    </>
+    </Layout>
 
   );
 };
