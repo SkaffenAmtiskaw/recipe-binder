@@ -127,6 +127,7 @@ const Form: FunctionComponent<Props> = ({ value, onChange, onSubmit }) => {
       <TagContext.Consumer>
         {(tags) => (
           <TagInput
+            label="Tags"
             options={tags}
             value={value.tags}
             onChange={(array) => onChange(array, 'tags')}
