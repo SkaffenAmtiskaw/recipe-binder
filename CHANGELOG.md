@@ -11,6 +11,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### Added
 - Alphabetized recipes and tags on the list page.
 - Added filtering by tags to the list page.
+- Added searching by title and ingredient to list page.
 
 ### Changed
 - Updated headers on all pages to have page-specific content.
