@@ -20,9 +20,10 @@ import {
 } from 'evergreen-ui';
 import { get } from 'dot-prop';
 
+import db from '@firebase/db';
+
 import { TagContext } from '../App';
 import { Layout, TagInput } from '../components';
-import db from '../firebase';
 import type { Recipe as RecipeType } from '../types';
 
 type Props = {

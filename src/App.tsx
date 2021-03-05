@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+import db from '@firebase/db';
 import dedupe from '@utils/dedupe'
 
 import Add from './pages/Add';
 import List from './pages/List';
 import Recipe from './pages/Recipe';
-import db from './firebase';
 
 export const TagContext = React.createContext<string[]>([]);
 

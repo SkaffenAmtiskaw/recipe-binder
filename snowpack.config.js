@@ -27,6 +27,7 @@ module.exports = {
     /* ... */
   },
   alias: {
+    '@firebase': './src/firebase',
     '@utils': './src/utils',
   }
 };

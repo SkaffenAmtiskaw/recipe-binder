@@ -3,11 +3,12 @@ import { useHistory } from 'react-router-dom';
 import { BackButton, Heading, majorScale } from 'evergreen-ui';
 import { paramCase } from 'param-case';
 
+import db from '@firebase/db';
+
 import Form from './Form';
 
 import { Layout } from '../components';
 import type { Recipe } from '../types';
-import db from '../firebase';
 
 type Props = {
   recipes: Recipe[],
