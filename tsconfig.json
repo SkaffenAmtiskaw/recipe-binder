@@ -22,6 +22,9 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "importsNotUsedAsValues": "error",
+    "paths": {
+      "@utils/*": ["./src/utils/*"],
+    }
   },
   "ts-node": {
     "compilerOptions": {

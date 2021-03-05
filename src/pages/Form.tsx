@@ -5,8 +5,8 @@ import { get } from 'dot-prop';
 import { ListInput, TagInput } from '../components';
 import { TagContext } from '../App';
 
-import { Recipe } from '../types';
-import { Type } from './Add';
+import type { Recipe } from '../types';
+import type { Type } from './Add';
 
 type Props = {
   value: Recipe,

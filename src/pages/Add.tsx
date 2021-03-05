@@ -6,7 +6,7 @@ import { paramCase } from 'param-case';
 import Form from './Form';
 
 import { Layout } from '../components';
-import { Recipe } from '../types';
+import type { Recipe } from '../types';
 import db from '../firebase';
 
 type Props = {

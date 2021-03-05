@@ -26,4 +26,7 @@ module.exports = {
   buildOptions: {
     /* ... */
   },
+  alias: {
+    '@utils': './src/utils',
+  }
 };
