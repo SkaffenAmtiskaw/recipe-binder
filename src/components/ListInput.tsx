@@ -1,6 +1,8 @@
 import React, { FormEvent, FunctionComponent, useEffect } from 'react';
 import { CrossIcon, IconButton, Pane, PlusIcon, TextareaField, TextInputField, majorScale } from 'evergreen-ui';
 
+import replace from '@utils/replace';
+
 type Props = {
   label: string,
   textarea?: boolean,
@@ -29,7 +31,7 @@ const ListInput: FunctionComponent<Props> = ({ label, textarea, value, onChange 
                 marginBottom={0}
                 value={value[idx]}
                 onChange={(e: FormEvent<HTMLTextAreaElement>) => {
-                  onChange([...value.slice(0, idx), e.currentTarget.value, ...value.slice(idx + 1, value.length)])
+                  onChange(replace(value, e.currentTarget.value, idx))
                 }}
               />
             ) : (
@@ -39,7 +41,7 @@ const ListInput: FunctionComponent<Props> = ({ label, textarea, value, onChange 
                 marginBottom={0}
                 value={value[idx]}
                 onChange={(e: FormEvent<HTMLInputElement>) => {
-                  onChange([...value.slice(0, idx), e.currentTarget.value, ...value.slice(idx + 1, value.length)])
+                  onChange(replace(value, e.currentTarget.value, idx))
                 }}
               />
             )

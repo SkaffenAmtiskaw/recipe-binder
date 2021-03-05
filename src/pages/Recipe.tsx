@@ -23,7 +23,7 @@ import { get } from 'dot-prop';
 import { TagContext } from '../App';
 import { Layout, TagInput } from '../components';
 import db from '../firebase';
-import { Recipe as RecipeType } from '../types';
+import type { Recipe as RecipeType } from '../types';
 
 type Props = {
   recipes: RecipeType[],

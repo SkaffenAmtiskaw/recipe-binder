@@ -2,7 +2,7 @@
   "scripts": {
     "start": "snowpack dev",
     "build": "snowpack build",
-    "test": "web-test-runner \"src/**/*.test.tsx\"",
+    "test": "ava --watch",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\""
   },
@@ -25,11 +25,29 @@
     "@types/mocha": "^8.2.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@types/react-router-dom": "^5.1.7",
     "@types/snowpack-env": "^2.3.2",
     "@web/test-runner": "^0.12.0",
+    "ava": "^3.15.0",
     "chai": "^4.2.0",
     "prettier": "^2.0.5",
     "snowpack": "^3.0.1",
+    "ts-node": "^9.1.1",
     "typescript": "^4.0.0"
-  }
+  },
+  "ava": {
+    "files": [
+      "src/**/*.test.ts"
+    ],
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
+  },
+  "ts-node": {
+    "module": "CommonJS"
+  },
+  "type": "module"
 }
