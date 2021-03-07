@@ -1,8 +1,9 @@
 import React, { FormEvent, FunctionComponent, KeyboardEvent, useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { Link as RouterLink, useHistory, useParams } from 'react-router-dom';
 import {
   BackButton,
   Badge,
+  Button,
   Heading,
   Link,
   ListItem,
@@ -20,10 +21,11 @@ import {
 } from 'evergreen-ui';
 import { get } from 'dot-prop';
 
+import db from '@firebase/db';
+
 import { TagContext } from '../App';
 import { Layout, TagInput } from '../components';
-import db from '../firebase';
-import { Recipe as RecipeType } from '../types';
+import type { Recipe as RecipeType } from '../types';
 
 type Props = {
   recipes: RecipeType[],
@@ -32,7 +34,7 @@ type Props = {
 
 type Params = {
   id: string
-}
+};
 
 const Recipe: FunctionComponent<Props> = ({ recipes, user }) => {
   const { id } = useParams<Params>();
@@ -59,7 +61,10 @@ const Recipe: FunctionComponent<Props> = ({ recipes, user }) => {
 
   return (
     <Layout header={(
-      <BackButton onClick={() => history.goBack()} />
+      <Pane>
+        <BackButton onClick={() => history.goBack()} />
+        <Button is={RouterLink} replace to={`/edit/${id}`}>Edit</Button>
+      </Pane>
     )}>
       <Heading is="h1">{get(recipe, 'title', '')}</Heading>
       {Object.keys(get(recipe, 'source', {})).length && (
@@ -69,10 +74,12 @@ const Recipe: FunctionComponent<Props> = ({ recipes, user }) => {
           get(recipe, 'source.name')}
         </Heading>
       )}
-      {get(recipe, 'tags', []).map((tag, idx) => (
-        <Badge color="neutral" key={tag} marginLeft={idx === 0 ? 0 : minorScale(1)} marginTop={majorScale(1)}>{tag}</Badge>
-      ))}
-      {Object.keys(get(recipe, 'time', {})).length && (
+      <Pane marginRight={majorScale(4)}>
+        {get(recipe, 'tags', []).map((tag, idx) => (
+          <Badge color="neutral" key={tag} marginLeft={idx === 0 ? 0 : minorScale(1)} marginTop={majorScale(1)}>{tag}</Badge>
+        ))}
+      </Pane>
+      {!!Object.keys(get(recipe, 'time', {})).length && (
         <Pane display="flex" marginTop={majorScale(1)} marginBottom={minorScale(1)}>
           {get(recipe, 'time.prep', '') && (
             <Pane alignItems="center" display="flex" marginRight={majorScale(4)}>

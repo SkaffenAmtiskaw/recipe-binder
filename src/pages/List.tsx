@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Badge, BadgeOwnProps, Button, Pane, Paragraph, SearchInput, Table, Text, majorScale, minorScale } from 'evergreen-ui';
 
 import { Layout, TagInput } from '../components';
-import { Recipe } from '../types';
+import type { Recipe } from '../types';
 
 import { TagContext } from '../App';
 

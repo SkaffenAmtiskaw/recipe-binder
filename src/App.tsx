@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+import db from '@firebase/db';
+import dedupe from '@utils/dedupe'
+
 import Add from './pages/Add';
+import Edit from './pages/Edit';
 import List from './pages/List';
 import Recipe from './pages/Recipe';
-import db from './firebase';
 
 export const TagContext = React.createContext<string[]>([]);
-
-const dedupe = (array: any[]) => array.filter((value, idx) => array.indexOf(value) === idx);
 
 const App = () => {
   const name = 'sarah';
@@ -39,6 +40,9 @@ const App = () => {
           </Route>
           <Route path="/view/:id">
             <Recipe user={user} recipes={recipes} />
+          </Route>
+          <Route path="/edit/:id">
+            <Edit user={user} recipes={recipes} />
           </Route>
           <Route path="*">
             <List recipes={recipes} />
