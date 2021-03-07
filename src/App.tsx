@@ -5,6 +5,7 @@ import db from '@firebase/db';
 import dedupe from '@utils/dedupe'
 
 import Add from './pages/Add';
+import Edit from './pages/Edit';
 import List from './pages/List';
 import Recipe from './pages/Recipe';
 
@@ -39,6 +40,9 @@ const App = () => {
           </Route>
           <Route path="/view/:id">
             <Recipe user={user} recipes={recipes} />
+          </Route>
+          <Route path="/edit/:id">
+            <Edit user={user} recipes={recipes} />
           </Route>
           <Route path="*">
             <List recipes={recipes} />
