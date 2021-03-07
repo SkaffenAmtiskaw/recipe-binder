@@ -23,6 +23,7 @@
     "allowSyntheticDefaultImports": true,
     "importsNotUsedAsValues": "error",
     "paths": {
+      "@firebase/*": ["./src/firebase/*"],
       "@utils/*": ["./src/utils/*"],
     }
   },
