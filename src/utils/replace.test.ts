@@ -2,7 +2,7 @@ import test from 'ava';
 
 import replace from './replace';
 
-test('replace should return a new array with an item changed at a specific index', t => {
+test('replace should return a new array with an item changed at a specific index', (t) => {
   t.plan(2);
 
   const array = [1, 2, 4, 4];
@@ -12,7 +12,7 @@ test('replace should return a new array with an item changed at a specific index
   t.notDeepEqual(array, result);
 });
 
-test('insert should work for any type of array', t => {
+test('insert should work for any type of array', (t) => {
   const foo = { name: 'foo' };
   const bar = { name: 'bar' };
   const baz = { name: 'baz' };

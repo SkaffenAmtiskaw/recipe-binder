@@ -1,18 +1,24 @@
 import React, { FormEvent, FunctionComponent } from 'react';
-import { Button, Pane, TextareaField, TextInputField, majorScale } from 'evergreen-ui';
+import {
+  Button,
+  Pane,
+  TextareaField,
+  TextInputField,
+  majorScale,
+} from 'evergreen-ui';
 import { get } from 'dot-prop';
 
-import { ListInput, TagInput } from '../components';
-import { TagContext } from '../App';
+import { ListInput, TagInput } from '../../components';
+import { TagContext } from '../../App';
 
-import type { Recipe } from '../types';
+import type { Recipe } from '../../types';
 import type { Type } from './Add';
 
 type Props = {
-  value: Recipe,
-  onChange: (value: any, type: Type) => void,
-  onSubmit: (recipe: Recipe) => void,
-}
+  value: Recipe;
+  onChange: (value: any, type: Type) => void;
+  onSubmit: (recipe: Recipe) => void;
+};
 
 const Form: FunctionComponent<Props> = ({ value, onChange, onSubmit }) => {
   return (
@@ -34,7 +40,10 @@ const Form: FunctionComponent<Props> = ({ value, onChange, onSubmit }) => {
           name="recipe-source-name"
           value={get(value, 'source.name', '')}
           onChange={(e: FormEvent<HTMLInputElement>) => {
-            onChange({ ...value.source, name: e.currentTarget.value }, 'source')
+            onChange(
+              { ...value.source, name: e.currentTarget.value },
+              'source',
+            );
           }}
         />
         <TextInputField
@@ -44,7 +53,7 @@ const Form: FunctionComponent<Props> = ({ value, onChange, onSubmit }) => {
           name="recipe-source-url"
           value={get(value, 'source.url', '')}
           onChange={(e: FormEvent<HTMLInputElement>) => {
-            onChange({ ...value.source, url: e.currentTarget.value }, 'source')
+            onChange({ ...value.source, url: e.currentTarget.value }, 'source');
           }}
         />
       </Pane>
@@ -57,7 +66,7 @@ const Form: FunctionComponent<Props> = ({ value, onChange, onSubmit }) => {
           name="recipe-prep-time"
           value={get(value, 'time.prep', '')}
           onChange={(e: FormEvent<HTMLInputElement>) => {
-            onChange({ ...value.time, prep: e.currentTarget.value }, 'time')
+            onChange({ ...value.time, prep: e.currentTarget.value }, 'time');
           }}
         />
         <TextInputField
@@ -68,7 +77,7 @@ const Form: FunctionComponent<Props> = ({ value, onChange, onSubmit }) => {
           name="recipe-cook-time"
           value={get(value, 'time.cook', '')}
           onChange={(e: FormEvent<HTMLInputElement>) => {
-            onChange({ ...value.time, cook: e.currentTarget.value }, 'time')
+            onChange({ ...value.time, cook: e.currentTarget.value }, 'time');
           }}
         />
         <TextInputField
@@ -79,7 +88,7 @@ const Form: FunctionComponent<Props> = ({ value, onChange, onSubmit }) => {
           name="recipe-total-time"
           value={get(value, 'time.total', '')}
           onChange={(e: FormEvent<HTMLInputElement>) => {
-            onChange({ ...value.time, total: e.currentTarget.value }, 'time')
+            onChange({ ...value.time, total: e.currentTarget.value }, 'time');
           }}
         />
         <TextInputField
@@ -89,7 +98,7 @@ const Form: FunctionComponent<Props> = ({ value, onChange, onSubmit }) => {
           name="recipe-actual-time"
           value={get(value, 'time.actual', '')}
           onChange={(e: FormEvent<HTMLInputElement>) => {
-            onChange({ ...value.time, actual: e.currentTarget.value }, 'time')
+            onChange({ ...value.time, actual: e.currentTarget.value }, 'time');
           }}
         />
       </Pane>
@@ -98,9 +107,12 @@ const Form: FunctionComponent<Props> = ({ value, onChange, onSubmit }) => {
         name="recipe-servings"
         type="number"
         value={value.servings}
-        width={`${1/3*100}%`}
+        width={`${(1 / 3) * 100}%`}
         onChange={(e: FormEvent<HTMLInputElement>) => {
-          onChange(e.currentTarget.value ? Number(e.currentTarget.value) : undefined, 'servings')
+          onChange(
+            e.currentTarget.value ? Number(e.currentTarget.value) : undefined,
+            'servings',
+          );
         }}
       />
       <ListInput
@@ -117,12 +129,16 @@ const Form: FunctionComponent<Props> = ({ value, onChange, onSubmit }) => {
       <TextareaField
         label="Storage"
         value={value.storage}
-        onChange={(e: FormEvent<HTMLTextAreaElement>) => onChange(e.currentTarget.value, 'storage')}
+        onChange={(e: FormEvent<HTMLTextAreaElement>) =>
+          onChange(e.currentTarget.value, 'storage')
+        }
       />
       <TextareaField
         label="Notes"
         value={value.notes}
-        onChange={(e: FormEvent<HTMLTextAreaElement>) => onChange(e.currentTarget.value, 'notes')}
+        onChange={(e: FormEvent<HTMLTextAreaElement>) =>
+          onChange(e.currentTarget.value, 'notes')
+        }
       />
       <TagContext.Consumer>
         {(tags) => (
@@ -154,7 +170,7 @@ const Form: FunctionComponent<Props> = ({ value, onChange, onSubmit }) => {
         Submit
       </Button>
     </Pane>
-  )
-}
+  );
+};
 
 export default Form;

@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import {majorScale, Pane} from 'evergreen-ui';
+import { majorScale, Pane } from 'evergreen-ui';
 
 interface Props {
   header: ReactNode;
