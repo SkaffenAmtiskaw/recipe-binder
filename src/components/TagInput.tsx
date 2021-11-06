@@ -1,14 +1,19 @@
 import React, { FunctionComponent, useState } from 'react';
-import { Autocomplete, FormField, TagInput as BaseTagInput, TagInputProps } from 'evergreen-ui';
+import {
+  Autocomplete,
+  FormField,
+  TagInput as BaseTagInput,
+  TagInputProps,
+} from 'evergreen-ui';
 
 interface Props extends TagInputProps {
-  description?: string,
-  label?: string,
-  max?: number,
-  options: string[],
-  restrict?: boolean,
-  value: string[],
-  onChange: (value: string[]) => void,
+  description?: string;
+  label?: string;
+  max?: number;
+  options: string[];
+  restrict?: boolean;
+  value: string[];
+  onChange: (value: string[]) => void;
 }
 
 const TagInput: FunctionComponent<Props> = ({
@@ -34,10 +39,19 @@ const TagInput: FunctionComponent<Props> = ({
       }}
     >
       {({ getInputProps, getRef }) => {
-        const { value: inputValue, onBlur, onChange: onInputChange, ...inputProps } = getInputProps();
+        const {
+          value: inputValue,
+          onBlur,
+          onChange: onInputChange,
+          ...inputProps
+        } = getInputProps();
 
         return (
-          <FormField description={description} label={label || ''} validationMessage={error}>
+          <FormField
+            description={description}
+            label={label || ''}
+            validationMessage={error}
+          >
             <BaseTagInput
               inputProps={{ disabled: max === value.length, value: input }}
               ref={getRef}
@@ -56,7 +70,7 @@ const TagInput: FunctionComponent<Props> = ({
                   }
 
                   return true;
-                })
+                });
                 onChange([...value, ...array]);
                 setInput('');
               }}
@@ -78,7 +92,7 @@ const TagInput: FunctionComponent<Props> = ({
               {...inputProps}
             />
           </FormField>
-        )
+        );
       }}
     </Autocomplete>
   );
