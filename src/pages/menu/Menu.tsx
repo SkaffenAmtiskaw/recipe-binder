@@ -64,7 +64,7 @@ const Menu = ({ menus, user }: Props) => {
   const { date: params } = useParams<{ date?: string }>();
 
   const [date, setDate] = useState(
-    getMonday(params ? new Date(params) : new Date()),
+    getMonday(params ? new Date(`${params}T00:00`) : new Date()),
   );
 
   const [edit, setEdit] = useState(false);
