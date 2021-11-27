@@ -75,7 +75,7 @@ const Menu = ({ menus, user }: Props) => {
 
   const menu: Day[] = menus[getISODate(date)] || [];
 
-  const onSubmit = (data) => {
+  const onSubmit = (data: Day[]) => {
     db.collection('users')
       .doc(user)
       .update({ 'meal_plans': {...menus, [getISODate(date)]: data } });
