@@ -1,33 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
+
+import dotProp from 'dot-prop';
 import {
   Button,
   ChevronRightIcon,
   ChevronLeftIcon,
   Heading,
   IconButton,
-  Link as LinkStyle,
   Pane,
-  Text,
   majorScale,
-  minorScale,
 } from 'evergreen-ui';
+
+import db from '@firebase/db';
+
+import Display from './Display';
+import Form from './Form';
 
 import { Layout } from '../../components';
 
-type Dish = {
+export type Dish = {
   name: string;
   source?: string;
   note?: string;
 };
 
-type Meal = {
+export type Meal = {
   food: Dish[];
   title: string;
   subtitle?: string;
 };
 
-type Day = {
+export type Day = {
   meals: Meal[];
   note?: string;
 };
@@ -40,7 +44,7 @@ type Props = {
 const getMonday = (date: Date) => {
   const day = date.getDay();
 
-  const diff = date.getDate() - day + 1;
+  const diff = date.getDate() - day + (day === 0 ? -6 : 1);
 
   return new Date(date.setDate(diff));
 };
@@ -63,29 +67,30 @@ const Menu = ({ menus, user }: Props) => {
     getMonday(params ? new Date(params) : new Date()),
   );
 
+  const [edit, setEdit] = useState(false);
+
   useEffect(() => {
     history.replace(`/meal-plan/${getISODate(date)}`);
   }, [date]);
 
-  const menu = menus[getISODate(date)] || [];
+  const menu: Day[] = menus[getISODate(date)] || [];
 
-  const weekday = new Intl.DateTimeFormat('en-us', { weekday: 'long' });
+  const onSubmit = (data) => {
+    db.collection('users')
+      .doc(user)
+      .update({ 'meal_plans': {...menus, [getISODate(date)]: data } });
+    setEdit(false);
+  }
 
-  const getLink = (dish: Dish) => {
-    if (dish.source?.[0] === '/') {
-      return (
-        <LinkStyle flex={1} is={Link} to={dish.source}>
-          {dish.name}
-        </LinkStyle>
-      );
-    }
+  const onDelete = () => {
+    const data = {...menus};
 
-    return (
-      <LinkStyle flex={1} href={dish.source}>
-        {dish.name}
-      </LinkStyle>
-    );
-  };
+    dotProp.delete(data, getISODate(date));
+
+    db.collection('users')
+      .doc(user)
+      .update({ 'meal_plans': data });
+  }
 
   return (
     <Layout
@@ -115,49 +120,11 @@ const Menu = ({ menus, user }: Props) => {
           />
         </Pane>
       </Pane>
-      <Pane display="flex" flexDirection="column">
-        {menu.map((value, index) => (
-          <Pane
-            key={weekday.format(new Date(date).setDate(date.getDate() + index))}
-            marginBottom={majorScale(1)}
-          >
-            <Pane background="tint1" padding={majorScale(1)} width="100%">
-              <Heading size={400}>
-                {weekday.format(new Date(date).setDate(date.getDate() + index))}
-              </Heading>
-            </Pane>
-            {value.meals.map((meal, mealIndex) => (
-              <Pane
-                key={meal.title}
-                display="flex"
-                width="100%"
-                borderTop={mealIndex === 0 ? '' : '1px solid #E6E8F0'}
-                paddingY={minorScale(1)}
-                paddingX={majorScale(1)}
-              >
-                <Pane flex={1}>
-                  <Heading size={300}>{meal.title}</Heading>
-                  <Text>{meal.subtitle}</Text>
-                </Pane>
-                <Pane flex={5}>
-                  {meal.food.map((dish) => (
-                    <Pane key={dish.name}>
-                      <Pane display="flex">
-                        {!!dish.source ? (
-                          getLink(dish)
-                        ) : (
-                          <Text flex={1}>{dish.name}</Text>
-                        )}
-                        <Text flex={3}>{dish.note}</Text>
-                      </Pane>
-                    </Pane>
-                  ))}
-                </Pane>
-              </Pane>
-            ))}
-          </Pane>
-        ))}
-      </Pane>
+      {!!menu.filter((v) => !!v).length && !edit ? (
+        <Display date={date} menu={menu} onEdit={() => setEdit(true)} />
+      ) : (
+        <Form date={date} menu={menu} onCancel={() => setEdit(false)} onDelete={onDelete} onSubmit={onSubmit} />
+      )}
     </Layout>
   );
 };
