@@ -10,6 +10,7 @@
     "dot-prop": "^6.0.1",
     "evergreen-ui": "^5.1.2",
     "firebase": "^8.2.9",
+    "klona": "^2.0.5",
     "param-case": "^3.0.4",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
