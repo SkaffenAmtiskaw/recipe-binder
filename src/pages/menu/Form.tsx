@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, KeyboardEvent, useState } from 'react';
 import {
   Button,
   Heading,
@@ -17,7 +17,9 @@ import replace from '../../utils/replace';
 
 import weekdayFormat from './weekdayFormat';
 
-import type { Day, Meal } from './Menu';
+import type { Day } from './Menu';
+
+type KeyDownEvent = KeyboardEvent<HTMLInputElement> | KeyboardEvent<HTMLTextAreaElement>
 
 type Props = {
   date: Date;
@@ -50,7 +52,7 @@ const Form = ({ date, menu, onCancel, onDelete, onSubmit }: Props) => {
     });
   }
 
-  const onKeyEvent = (key: string, modifier: boolean) => (callback: (e: KeyboardEvent) => void) => (e: KeyboardEvent) => {
+  const onKeyEvent = (key: string, modifier: boolean) => (callback: (e: KeyDownEvent) => void) => (e: KeyDownEvent) => {
     if (key === e.key.toLowerCase() && (e.metaKey || e.ctrlKey) === modifier) {
       e.preventDefault();
       callback(e);
@@ -99,7 +101,7 @@ const Form = ({ date, menu, onCancel, onDelete, onSubmit }: Props) => {
                       `${weekday}.meals.${index}.title`,
                     )
                   }
-                  onKeyDown={onCtrlD(deleteValue(`${weekday}.meals.${index}`) as (e: KeyboardEvent) => void)}
+                  onKeyDown={onCtrlD(deleteValue(`${weekday}.meals.${index}`) as (e: KeyDownEvent) => void)}
                 />
                 <TextInputField
                   gridArea="subtitle"
@@ -112,7 +114,7 @@ const Form = ({ date, menu, onCancel, onDelete, onSubmit }: Props) => {
                       `${weekday}.meals.${index}.subtitle`,
                     )
                   }
-                  onKeyDown={onCtrlD(deleteValue(`${weekday}.meals.${index}`) as (e: KeyboardEvent) => void)}
+                  onKeyDown={onCtrlD(deleteValue(`${weekday}.meals.${index}`) as (e: KeyDownEvent) => void)}
                 />
                 <Pane gridArea="food" paddingLeft={minorScale(1)} marginLeft={minorScale(-1)} borderLeft="1px dotted #E6E8F0">
                   {meal.food.map((dish, foodIndex) => (
@@ -129,7 +131,7 @@ const Form = ({ date, menu, onCancel, onDelete, onSubmit }: Props) => {
                             `${weekday}.meals.${index}.food.${foodIndex}.name`,
                           )
                         }
-                        onKeyDown={onCtrlD(deleteValue(`${weekday}.meals.${index}.food.${foodIndex}`)  as (e: KeyboardEvent) => void)}
+                        onKeyDown={onCtrlD(deleteValue(`${weekday}.meals.${index}.food.${foodIndex}`)  as (e: KeyDownEvent) => void)}
                       />
                       <TextInputField
                         description="Source"
@@ -144,7 +146,7 @@ const Form = ({ date, menu, onCancel, onDelete, onSubmit }: Props) => {
                             `${weekday}.meals.${index}.food.${foodIndex}.source`,
                           )
                         }
-                        onKeyDown={onCtrlD(deleteValue(`${weekday}.meals.${index}.food.${foodIndex}`)  as (e: KeyboardEvent) => void)}
+                        onKeyDown={onCtrlD(deleteValue(`${weekday}.meals.${index}.food.${foodIndex}`)  as (e: KeyDownEvent) => void)}
                       />
                       <TextareaField
                         description="Note"
@@ -159,7 +161,7 @@ const Form = ({ date, menu, onCancel, onDelete, onSubmit }: Props) => {
                             `${weekday}.meals.${index}.food.${foodIndex}.note`,
                           )
                         }
-                        onKeyDown={onCtrlD(deleteValue(`${weekday}.meals.${index}.food.${foodIndex}`)  as (e: KeyboardEvent) => void)}
+                        onKeyDown={onCtrlD(deleteValue(`${weekday}.meals.${index}.food.${foodIndex}`)  as (e: KeyDownEvent) => void)}
                       />
                     </Pane>
                   ))}
