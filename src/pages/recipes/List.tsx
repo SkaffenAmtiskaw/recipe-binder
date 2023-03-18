@@ -193,7 +193,6 @@ const List: FunctionComponent<Props> = ({ recipes }) => {
                             ? 'neutral'
                             : COLORS[tagFilters.indexOf(tag)]
                         }
-                        isSolid={tagFilters.indexOf(tag) !== -1}
                         key={tag}
                         marginLeft={idx === 0 ? 0 : minorScale(1)}
                       >

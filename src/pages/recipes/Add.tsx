@@ -1,4 +1,4 @@
-import { BackButton, Heading, majorScale } from 'evergreen-ui';
+import { Heading, majorScale } from 'evergreen-ui';
 import { paramCase } from 'param-case';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -9,7 +9,7 @@ import db from '@firebase/db';
 
 import Form from './Form';
 
-import { Layout } from '../../components';
+import { BackButton, Layout } from '../../components';
 import type { Recipe } from '../../types';
 
 type Props = {
@@ -76,7 +76,7 @@ const Add: FunctionComponent<Props> = ({ recipes, user }) => {
   };
 
   return (
-    <Layout header={<BackButton onClick={() => navigate(-1)} />}>
+    <Layout header={<BackButton />}>
       <Heading marginBottom={majorScale(1)}>Add Recipe</Heading>
       <Form
         value={value}
