@@ -1,10 +1,10 @@
-import React, { FunctionComponent, useState } from 'react';
 import {
   Autocomplete,
   FormField,
   TagInput as BaseTagInput,
   TagInputProps,
 } from 'evergreen-ui';
+import { FunctionComponent, useState } from 'react';
 
 interface Props extends TagInputProps {
   description?: string;

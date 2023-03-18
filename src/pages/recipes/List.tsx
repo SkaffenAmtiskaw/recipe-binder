@@ -1,17 +1,17 @@
-import React, { ChangeEvent, FunctionComponent, useState } from 'react';
-import { Link } from 'react-router-dom';
 import {
   Badge,
   BadgeOwnProps,
   Button,
+  majorScale,
+  minorScale,
   Pane,
   Paragraph,
   SearchInput,
   Table,
   Text,
-  majorScale,
-  minorScale,
 } from 'evergreen-ui';
+import { ChangeEvent, FunctionComponent, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Layout, TagInput } from '../../components';
 import type { Recipe } from '../../types';

@@ -1,15 +1,15 @@
-import React, { FormEvent, FunctionComponent } from 'react';
+import { get } from 'dot-prop';
 import {
   Button,
+  majorScale,
   Pane,
   TextareaField,
   TextInputField,
-  majorScale,
 } from 'evergreen-ui';
-import { get } from 'dot-prop';
+import type { FormEvent, FunctionComponent } from 'react';
 
-import { ListInput, TagInput } from '../../components';
 import { TagContext } from '../../App';
+import { ListInput, TagInput } from '../../components';
 
 import type { Recipe } from '../../types';
 import type { Type } from './Add';

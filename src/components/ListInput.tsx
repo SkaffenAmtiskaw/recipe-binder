@@ -1,13 +1,13 @@
-import React, { FormEvent, FunctionComponent, useEffect } from 'react';
 import {
   CrossIcon,
   IconButton,
+  majorScale,
   Pane,
   PlusIcon,
   TextareaField,
   TextInputField,
-  majorScale,
 } from 'evergreen-ui';
+import { FormEvent, FunctionComponent, useEffect } from 'react';
 
 import replace from '@utils/replace';
 

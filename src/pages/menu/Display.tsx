@@ -1,11 +1,11 @@
-import React from 'react';
 import {
+  Button,
   Heading,
   Link as StyledLink,
+  majorScale,
+  minorScale,
   Pane,
   Text,
-  majorScale,
-  minorScale, Button,
 } from 'evergreen-ui';
 import { Link } from 'react-router-dom';
 
@@ -80,7 +80,9 @@ const Display = ({ date, menu, onEdit }: Props) => {
           </Pane>
         );
       })}
-      <Button appearance="default" width="max-content" onClick={onEdit}>Edit</Button>
+      <Button appearance="default" width="max-content" onClick={onEdit}>
+        Edit
+      </Button>
     </Pane>
   );
 };
