@@ -7,7 +7,9 @@ import {
   TextareaField,
   TextInputField,
 } from 'evergreen-ui';
-import { FormEvent, FunctionComponent, useEffect } from 'react';
+import { useEffect } from 'react';
+
+import type { FormEvent, FunctionComponent } from 'react';
 
 import replace from '@utils/replace';
 

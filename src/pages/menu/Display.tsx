@@ -1,11 +1,11 @@
 import {
   Button,
   Heading,
+  Pane,
   Link as StyledLink,
+  Text,
   majorScale,
   minorScale,
-  Pane,
-  Text,
 } from 'evergreen-ui';
 import { Link } from 'react-router-dom';
 

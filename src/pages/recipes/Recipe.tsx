@@ -18,14 +18,10 @@ import {
   TimeIcon,
   UnorderedList,
 } from 'evergreen-ui';
-import {
-  FormEvent,
-  FunctionComponent,
-  KeyboardEvent,
-  useEffect,
-  useState,
-} from 'react';
+import { useEffect, useState } from 'react';
 import { Link as RouterLink, useHistory, useParams } from 'react-router-dom';
+
+import type { FormEvent, FunctionComponent, KeyboardEvent } from 'react';
 
 import db from '@firebase/db';
 

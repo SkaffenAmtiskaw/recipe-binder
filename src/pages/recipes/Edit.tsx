@@ -1,8 +1,10 @@
 import { get } from 'dot-prop';
 import { BackButton, Heading, majorScale } from 'evergreen-ui';
 import { paramCase } from 'param-case';
-import { FunctionComponent, useState } from 'react';
+import { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+
+import type { FunctionComponent } from 'react';
 
 import db from '@firebase/db';
 import replace from '@utils/replace';
