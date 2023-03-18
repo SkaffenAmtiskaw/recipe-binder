@@ -3,7 +3,7 @@
     "start": "vite",
     "build": "tsc && vite build",
     "test": "ava --watch",
-    "coverage": "c8 --reporter=html --all --include=src/** --exclude=src/firebase/** ava",
+    "coverage": "c8 --reporter=html --all --include=src/** --exclude=src/firebase/** --exclude=src/**/*.test.ts ava",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\""
   },
