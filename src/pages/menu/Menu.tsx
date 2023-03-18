@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useHistory, useParams } from 'react-router-dom';
 
 import dotProp from 'dot-prop';
 import {
   Button,
-  ChevronRightIcon,
   ChevronLeftIcon,
+  ChevronRightIcon,
   Heading,
   IconButton,
-  Pane,
   majorScale,
+  Pane,
 } from 'evergreen-ui';
 
 import db from '@firebase/db';
@@ -78,19 +78,17 @@ const Menu = ({ menus, user }: Props) => {
   const onSubmit = (data: Day[]) => {
     db.collection('users')
       .doc(user)
-      .update({ 'meal_plans': {...menus, [getISODate(date)]: data } });
+      .update({ meal_plans: { ...menus, [getISODate(date)]: data } });
     setEdit(false);
-  }
+  };
 
   const onDelete = () => {
-    const data = {...menus};
+    const data = { ...menus };
 
     dotProp.delete(data, getISODate(date));
 
-    db.collection('users')
-      .doc(user)
-      .update({ 'meal_plans': data });
-  }
+    db.collection('users').doc(user).update({ meal_plans: data });
+  };
 
   return (
     <Layout
@@ -123,7 +121,13 @@ const Menu = ({ menus, user }: Props) => {
       {!!menu.filter((v) => !!v).length && !edit ? (
         <Display date={date} menu={menu} onEdit={() => setEdit(true)} />
       ) : (
-        <Form date={date} menu={menu} onCancel={() => setEdit(false)} onDelete={onDelete} onSubmit={onSubmit} />
+        <Form
+          date={date}
+          menu={menu}
+          onCancel={() => setEdit(false)}
+          onDelete={onDelete}
+          onSubmit={onSubmit}
+        />
       )}
     </Layout>
   );

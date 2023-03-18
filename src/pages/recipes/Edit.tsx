@@ -1,16 +1,16 @@
-import React, { FunctionComponent, useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { get } from 'dot-prop';
 import { BackButton, Heading, majorScale } from 'evergreen-ui';
 import { paramCase } from 'param-case';
-import { get } from 'dot-prop';
+import { FunctionComponent, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 
 import db from '@firebase/db';
 import replace from '@utils/replace';
 
-import type { Recipe } from '../../types';
 import { Layout } from '../../components';
-import Form from './Form';
+import type { Recipe } from '../../types';
 import type { Type } from './Add';
+import Form from './Form';
 
 type Props = {
   recipes: Recipe[];

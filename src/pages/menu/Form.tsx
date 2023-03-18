@@ -1,15 +1,15 @@
-import React, { FormEvent, KeyboardEvent, useState } from 'react';
 import {
   Button,
   Heading,
-  Pane,
-  PlusIcon,
-  TextInputField,
-  TextareaField,
   majorScale,
   minorScale,
+  Pane,
+  PlusIcon,
+  TextareaField,
+  TextInputField,
 } from 'evergreen-ui';
 import { klona } from 'klona';
+import { FormEvent, KeyboardEvent, useState } from 'react';
 
 import dotProp from 'dot-prop';
 
@@ -19,7 +19,9 @@ import weekdayFormat from './weekdayFormat';
 
 import type { Day } from './Menu';
 
-type KeyDownEvent = KeyboardEvent<HTMLInputElement> | KeyboardEvent<HTMLTextAreaElement>
+type KeyDownEvent =
+  | KeyboardEvent<HTMLInputElement>
+  | KeyboardEvent<HTMLTextAreaElement>;
 
 type Props = {
   date: Date;
@@ -46,18 +48,24 @@ const Form = ({ date, menu, onCancel, onDelete, onSubmit }: Props) => {
 
   const deleteValue = (path: string) => () => {
     setData((state) => {
-      const value = [...state]
+      const value = [...state];
       dotProp.delete(value, path);
       return value;
     });
-  }
+  };
 
-  const onKeyEvent = (key: string, modifier: boolean) => (callback: (e: KeyDownEvent) => void) => (e: KeyDownEvent) => {
-    if (key === e.key.toLowerCase() && (e.metaKey || e.ctrlKey) === modifier) {
-      e.preventDefault();
-      callback(e);
-    }
-  }
+  const onKeyEvent =
+    (key: string, modifier: boolean) =>
+    (callback: (e: KeyDownEvent) => void) =>
+    (e: KeyDownEvent) => {
+      if (
+        key === e.key.toLowerCase() &&
+        (e.metaKey || e.ctrlKey) === modifier
+      ) {
+        e.preventDefault();
+        callback(e);
+      }
+    };
 
   const onCtrlD = onKeyEvent('d', true);
 
@@ -101,7 +109,11 @@ const Form = ({ date, menu, onCancel, onDelete, onSubmit }: Props) => {
                       `${weekday}.meals.${index}.title`,
                     )
                   }
-                  onKeyDown={onCtrlD(deleteValue(`${weekday}.meals.${index}`) as (e: KeyDownEvent) => void)}
+                  onKeyDown={onCtrlD(
+                    deleteValue(`${weekday}.meals.${index}`) as (
+                      e: KeyDownEvent,
+                    ) => void,
+                  )}
                 />
                 <TextInputField
                   gridArea="subtitle"
@@ -114,11 +126,26 @@ const Form = ({ date, menu, onCancel, onDelete, onSubmit }: Props) => {
                       `${weekday}.meals.${index}.subtitle`,
                     )
                   }
-                  onKeyDown={onCtrlD(deleteValue(`${weekday}.meals.${index}`) as (e: KeyDownEvent) => void)}
+                  onKeyDown={onCtrlD(
+                    deleteValue(`${weekday}.meals.${index}`) as (
+                      e: KeyDownEvent,
+                    ) => void,
+                  )}
                 />
-                <Pane gridArea="food" paddingLeft={minorScale(1)} marginLeft={minorScale(-1)} borderLeft="1px dotted #E6E8F0">
+                <Pane
+                  gridArea="food"
+                  paddingLeft={minorScale(1)}
+                  marginLeft={minorScale(-1)}
+                  borderLeft="1px dotted #E6E8F0"
+                >
                   {meal.food.map((dish, foodIndex) => (
-                    <Pane alignItems="start" display="grid" gridTemplateColumns="1fr 1fr 1fr" gridColumnGap={minorScale(1)} key={`dish-${weekday}-${index}-${foodIndex}`}>
+                    <Pane
+                      alignItems="start"
+                      display="grid"
+                      gridTemplateColumns="1fr 1fr 1fr"
+                      gridColumnGap={minorScale(1)}
+                      key={`dish-${weekday}-${index}-${foodIndex}`}
+                    >
                       <TextInputField
                         description="Name"
                         label={foodIndex === 0 ? 'Food' : ''}
@@ -131,7 +158,11 @@ const Form = ({ date, menu, onCancel, onDelete, onSubmit }: Props) => {
                             `${weekday}.meals.${index}.food.${foodIndex}.name`,
                           )
                         }
-                        onKeyDown={onCtrlD(deleteValue(`${weekday}.meals.${index}.food.${foodIndex}`)  as (e: KeyDownEvent) => void)}
+                        onKeyDown={onCtrlD(
+                          deleteValue(
+                            `${weekday}.meals.${index}.food.${foodIndex}`,
+                          ) as (e: KeyDownEvent) => void,
+                        )}
                       />
                       <TextInputField
                         description="Source"
@@ -146,7 +177,11 @@ const Form = ({ date, menu, onCancel, onDelete, onSubmit }: Props) => {
                             `${weekday}.meals.${index}.food.${foodIndex}.source`,
                           )
                         }
-                        onKeyDown={onCtrlD(deleteValue(`${weekday}.meals.${index}.food.${foodIndex}`)  as (e: KeyDownEvent) => void)}
+                        onKeyDown={onCtrlD(
+                          deleteValue(
+                            `${weekday}.meals.${index}.food.${foodIndex}`,
+                          ) as (e: KeyDownEvent) => void,
+                        )}
                       />
                       <TextareaField
                         description="Note"
@@ -161,11 +196,24 @@ const Form = ({ date, menu, onCancel, onDelete, onSubmit }: Props) => {
                             `${weekday}.meals.${index}.food.${foodIndex}.note`,
                           )
                         }
-                        onKeyDown={onCtrlD(deleteValue(`${weekday}.meals.${index}.food.${foodIndex}`)  as (e: KeyDownEvent) => void)}
+                        onKeyDown={onCtrlD(
+                          deleteValue(
+                            `${weekday}.meals.${index}.food.${foodIndex}`,
+                          ) as (e: KeyDownEvent) => void,
+                        )}
                       />
                     </Pane>
                   ))}
-                  <Button appearance="minimal" iconBefore={PlusIcon} onClick={() => editValue({}, `${weekday}.meals.${index}.food.${meal.food.length}`)}>
+                  <Button
+                    appearance="minimal"
+                    iconBefore={PlusIcon}
+                    onClick={() =>
+                      editValue(
+                        {},
+                        `${weekday}.meals.${index}.food.${meal.food.length}`,
+                      )
+                    }
+                  >
                     Add Dish
                   </Button>
                 </Pane>
@@ -183,18 +231,25 @@ const Form = ({ date, menu, onCancel, onDelete, onSubmit }: Props) => {
       ))}
       <Pane display="flex" justifyContent="space-between">
         <Pane>
-          <Button appearance="primary" marginRight={majorScale(1)} width="max-content" onClick={() => onSubmit(data)}>Save</Button>
-          {
-            !!menu.length && (
-              <Button appearance="default" width="max-content" onClick={onCancel}>Cancel</Button>
-            )
-          }
+          <Button
+            appearance="primary"
+            marginRight={majorScale(1)}
+            width="max-content"
+            onClick={() => onSubmit(data)}
+          >
+            Save
+          </Button>
+          {!!menu.length && (
+            <Button appearance="default" width="max-content" onClick={onCancel}>
+              Cancel
+            </Button>
+          )}
         </Pane>
-        {
-          !!menu.length && (
-            <Button appearance="minimal" intent="danger" onClick={onDelete}>Delete</Button>
-          )
-        }
+        {!!menu.length && (
+          <Button appearance="minimal" intent="danger" onClick={onDelete}>
+            Delete
+          </Button>
+        )}
       </Pane>
     </Pane>
   );

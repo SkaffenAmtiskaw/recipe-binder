@@ -4,11 +4,11 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import db from '@firebase/db';
 import dedupe from '@utils/dedupe';
 
+import Menu from './pages/menu/Menu';
 import Add from './pages/recipes/Add';
 import Edit from './pages/recipes/Edit';
 import List from './pages/recipes/List';
 import Recipe from './pages/recipes/Recipe';
-import Menu from './pages/menu/Menu';
 
 export const TagContext = React.createContext<string[]>([]);
 

@@ -1,11 +1,4 @@
-import React, {
-  FormEvent,
-  FunctionComponent,
-  KeyboardEvent,
-  useEffect,
-  useState,
-} from 'react';
-import { Link as RouterLink, useHistory, useParams } from 'react-router-dom';
+import { get } from 'dot-prop';
 import {
   BackButton,
   Badge,
@@ -13,19 +6,26 @@ import {
   Heading,
   Link,
   ListItem,
+  majorScale,
+  minorScale,
   OrderedList,
   Pane,
   Paragraph,
   Strong,
   Text,
-  TextInput,
   Textarea,
+  TextInput,
   TimeIcon,
   UnorderedList,
-  majorScale,
-  minorScale,
 } from 'evergreen-ui';
-import { get } from 'dot-prop';
+import {
+  FormEvent,
+  FunctionComponent,
+  KeyboardEvent,
+  useEffect,
+  useState,
+} from 'react';
+import { Link as RouterLink, useHistory, useParams } from 'react-router-dom';
 
 import db from '@firebase/db';
 
