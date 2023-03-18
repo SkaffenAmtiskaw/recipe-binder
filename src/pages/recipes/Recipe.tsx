@@ -1,6 +1,5 @@
 import { get } from 'dot-prop';
 import {
-  BackButton,
   Badge,
   Button,
   Heading,
@@ -26,7 +25,7 @@ import type { FormEvent, FunctionComponent, KeyboardEvent } from 'react';
 import db from '@firebase/db';
 
 import { TagContext } from '../../App';
-import { Layout, TagInput } from '../../components';
+import { BackButton, Layout, TagInput } from '../../components';
 import type { Recipe as RecipeType } from '../../types';
 
 type Props = {
@@ -70,7 +69,7 @@ const Recipe: FunctionComponent<Props> = ({ recipes, user }) => {
     <Layout
       header={
         <Pane>
-          <BackButton onClick={() => navigate(-1)} />
+          <BackButton />
           <Button is={RouterLink} replace to={`/edit/${id}`}>
             Edit
           </Button>
