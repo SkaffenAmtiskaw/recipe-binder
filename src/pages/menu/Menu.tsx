@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import dotProp from 'dot-prop';
 import {
@@ -59,7 +59,7 @@ const goForward = (date: Date) => new Date(date.setDate(date.getDate() + 7));
 const goBack = (date: Date) => new Date(date.setDate(date.getDate() - 7));
 
 const Menu = ({ menus, user }: Props) => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { date: params } = useParams<{ date?: string }>();
 
@@ -70,7 +70,7 @@ const Menu = ({ menus, user }: Props) => {
   const [edit, setEdit] = useState(false);
 
   useEffect(() => {
-    history.replace(`/meal-plan/${getISODate(date)}`);
+    navigate(`/meal-plan/${getISODate(date)}`, { replace: true });
   }, [date]);
 
   const menu: Day[] = menus[getISODate(date)] || [];

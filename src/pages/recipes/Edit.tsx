@@ -2,7 +2,7 @@ import { get } from 'dot-prop';
 import { BackButton, Heading, majorScale } from 'evergreen-ui';
 import { paramCase } from 'param-case';
 import { useState } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import type { FunctionComponent } from 'react';
 
@@ -51,7 +51,7 @@ const Edit: FunctionComponent<Props> = ({ recipes, user }) => {
   }>(get(recipe, 'time', {}));
   const [title, setTitle] = useState<string>(get(recipe, 'title', ''));
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const value = {
     id: paramCase(title),
@@ -84,7 +84,7 @@ const Edit: FunctionComponent<Props> = ({ recipes, user }) => {
   };
 
   return (
-    <Layout header={<BackButton onClick={() => history.goBack()} />}>
+    <Layout header={<BackButton onClick={() => navigate(-1)} />}>
       <Heading marginBottom={majorScale(1)}>Edit {title}</Heading>
       <Form
         value={value}
@@ -93,7 +93,7 @@ const Edit: FunctionComponent<Props> = ({ recipes, user }) => {
           db.collection('users')
             .doc(user)
             .update({ recipes: replace(recipes, data, recipeIndex) });
-          history.replace(`/view/${id}`);
+          navigate(`/view/${id}`);
         }}
       />
     </Layout>

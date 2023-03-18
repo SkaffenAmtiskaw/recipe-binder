@@ -19,7 +19,7 @@ import {
   UnorderedList,
 } from 'evergreen-ui';
 import { useEffect, useState } from 'react';
-import { Link as RouterLink, useHistory, useParams } from 'react-router-dom';
+import { Link as RouterLink, useNavigate, useParams } from 'react-router-dom';
 
 import type { FormEvent, FunctionComponent, KeyboardEvent } from 'react';
 
@@ -64,13 +64,13 @@ const Recipe: FunctionComponent<Props> = ({ recipes, user }) => {
       });
   };
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   return (
     <Layout
       header={
         <Pane>
-          <BackButton onClick={() => history.goBack()} />
+          <BackButton onClick={() => navigate(-1)} />
           <Button is={RouterLink} replace to={`/edit/${id}`}>
             Edit
           </Button>
@@ -90,7 +90,7 @@ const Recipe: FunctionComponent<Props> = ({ recipes, user }) => {
               {get(recipe, 'source.name', '')}
             </Link>
           ) : (
-            get(recipe, 'source.name')
+            get(recipe, 'source.name', '')
           )}
         </Heading>
       )}
@@ -119,7 +119,7 @@ const Recipe: FunctionComponent<Props> = ({ recipes, user }) => {
               marginRight={majorScale(4)}
             >
               <TimeIcon color="muted" marginRight={minorScale(1)} />
-              <Text>Prep Time: {get(recipe, 'time.prep')}</Text>
+              <Text>Prep Time: {get(recipe, 'time.prep', '')}</Text>
             </Pane>
           )}
           {get(recipe, 'time.cook', '') && (
@@ -129,7 +129,7 @@ const Recipe: FunctionComponent<Props> = ({ recipes, user }) => {
               marginRight={majorScale(4)}
             >
               <TimeIcon color="muted" marginRight={minorScale(1)} />
-              <Text>Cook Time: {get(recipe, 'time.cook')}</Text>
+              <Text>Cook Time: {get(recipe, 'time.cook', '')}</Text>
             </Pane>
           )}
           {get(recipe, 'time.total', '') && (
@@ -139,7 +139,7 @@ const Recipe: FunctionComponent<Props> = ({ recipes, user }) => {
               marginRight={majorScale(4)}
             >
               <TimeIcon color="muted" marginRight={minorScale(1)} />
-              <Strong>Total Time: {get(recipe, 'time.total')}</Strong>
+              <Strong>Total Time: {get(recipe, 'time.total', '')}</Strong>
             </Pane>
           )}
           <Pane alignItems="center" display="flex">
@@ -177,7 +177,7 @@ const Recipe: FunctionComponent<Props> = ({ recipes, user }) => {
         </Pane>
       )}
       {get(recipe, 'servings', null) && (
-        <Text>Servings: {get(recipe, 'servings')}</Text>
+        <Text>Servings: {get(recipe, 'servings', '')}</Text>
       )}
       <Heading marginTop={majorScale(4)} size={400}>
         Ingredients
