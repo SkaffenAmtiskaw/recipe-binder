@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
 import db from '@firebase/db';
 import dedupe from '@utils/dedupe';
@@ -46,26 +46,26 @@ const App = () => {
           recipes.reduce((array, { tags }) => [...array, ...tags], []),
         )}
       >
-        <Switch>
-          <Route path="/add">
-            <Add user={user} recipes={recipes} />
-          </Route>
-          <Route path="/view/:id">
-            <Recipe user={user} recipes={recipes} />
-          </Route>
-          <Route path="/edit/:id">
-            <Edit user={user} recipes={recipes} />
-          </Route>
-          <Route path="/meal-plan/:date">
-            <Menu menus={menus} user={user} />
-          </Route>
-          <Route path="/meal-plan">
-            <Menu menus={menus} user={user} />
-          </Route>
-          <Route path="*">
-            <List recipes={recipes} />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path="/add" element={<Add user={user} recipes={recipes} />} />
+          <Route
+            path="/view/:id"
+            element={<Recipe user={user} recipes={recipes} />}
+          />
+          <Route
+            path="/edit/:id"
+            element={<Edit user={user} recipes={recipes} />}
+          />
+          <Route
+            path="/meal-plan/:date"
+            element={<Menu menus={menus} user={user} />}
+          />
+          <Route
+            path="/meal-plan"
+            element={<Menu menus={menus} user={user} />}
+          />
+          <Route path="*" element={<List recipes={recipes} />} />
+        </Routes>
       </TagContext.Provider>
     </Router>
   );

@@ -1,7 +1,7 @@
 import { BackButton, Heading, majorScale } from 'evergreen-ui';
 import { paramCase } from 'param-case';
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import type { FunctionComponent } from 'react';
 
@@ -43,7 +43,7 @@ const Add: FunctionComponent<Props> = ({ recipes, user }) => {
   }>({});
   const [title, setTitle] = useState<string>('');
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const value = {
     id: paramCase(title),
@@ -76,7 +76,7 @@ const Add: FunctionComponent<Props> = ({ recipes, user }) => {
   };
 
   return (
-    <Layout header={<BackButton onClick={() => history.goBack()} />}>
+    <Layout header={<BackButton onClick={() => navigate(-1)} />}>
       <Heading marginBottom={majorScale(1)}>Add Recipe</Heading>
       <Form
         value={value}
@@ -87,7 +87,7 @@ const Add: FunctionComponent<Props> = ({ recipes, user }) => {
             .update({
               recipes: [...recipes, { ...data, id: paramCase(data.title) }],
             });
-          history.push('/list');
+          navigate('/list');
         }}
       />
     </Layout>
