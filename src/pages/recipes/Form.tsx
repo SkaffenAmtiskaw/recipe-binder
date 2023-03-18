@@ -6,7 +6,7 @@ import {
   TextareaField,
   TextInputField,
 } from 'evergreen-ui';
-import { FormEvent, FunctionComponent } from 'react';
+import type { FormEvent, FunctionComponent } from 'react';
 
 import { TagContext } from '../../App';
 import { ListInput, TagInput } from '../../components';
