@@ -9,7 +9,9 @@ import {
   TextInputField,
 } from 'evergreen-ui';
 import { klona } from 'klona';
-import { FormEvent, KeyboardEvent, useState } from 'react';
+import { useState } from 'react';
+
+import type { FormEvent, KeyboardEvent } from 'react';
 
 import dotProp from 'dot-prop';
 

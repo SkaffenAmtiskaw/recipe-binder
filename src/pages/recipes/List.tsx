@@ -1,6 +1,5 @@
 import {
   Badge,
-  BadgeOwnProps,
   Button,
   majorScale,
   minorScale,
@@ -10,8 +9,11 @@ import {
   Table,
   Text,
 } from 'evergreen-ui';
-import { ChangeEvent, FunctionComponent, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+
+import type { BadgeOwnProps } from 'evergreen-ui';
+import type { ChangeEvent, FunctionComponent } from 'react';
 
 import { Layout, TagInput } from '../../components';
 import type { Recipe } from '../../types';
