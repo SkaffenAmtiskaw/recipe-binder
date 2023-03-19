@@ -33,10 +33,11 @@
   },
   "ava": {
     "files": [
-      "src/**/*.test.ts"
+      "src/**/*.test.{ts,tsx}"
     ],
     "extensions": {
-      "ts": "module"
+      "ts": "module",
+      "tsx": "module"
     },
     "nodeArguments": [
       "--no-warnings",
