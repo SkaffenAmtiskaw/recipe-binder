@@ -7,7 +7,7 @@ import {
   TextareaField,
   TextInputField,
 } from 'evergreen-ui';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import type { FormEvent, FunctionComponent } from 'react';
 
@@ -27,12 +27,15 @@ const ListInput: FunctionComponent<Props> = ({
   onChange,
 }) => {
   useEffect(() => {
-    // If the array is empty, initialize the list with an empty text input so it's not confusing to the user.
+    // If the array is empty, initialize the list with an empty text input, so it's not confusing to the user.
     if (!value.length) {
       onChange(['']);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handleChange = useCallback((index: number) => (e: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    onChange(replace(value, e.currentTarget.value, index));
+  }, [onChange]);
 
   return (
     <Pane marginBottom={majorScale(2)}>
@@ -50,9 +53,7 @@ const ListInput: FunctionComponent<Props> = ({
               label={idx === 0 ? label : ''}
               marginBottom={0}
               value={value[idx]}
-              onChange={(e: FormEvent<HTMLTextAreaElement>) => {
-                onChange(replace(value, e.currentTarget.value, idx));
-              }}
+              onChange={handleChange(idx)}
             />
           ) : (
             <TextInputField
@@ -60,9 +61,7 @@ const ListInput: FunctionComponent<Props> = ({
               label={idx === 0 ? label : ''}
               marginBottom={0}
               value={value[idx]}
-              onChange={(e: FormEvent<HTMLInputElement>) => {
-                onChange(replace(value, e.currentTarget.value, idx));
-              }}
+              onChange={handleChange(idx)}
             />
           )}
 

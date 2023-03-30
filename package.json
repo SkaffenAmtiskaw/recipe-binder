@@ -3,12 +3,11 @@
     "start": "vite",
     "build": "tsc && vite build",
     "test": "ava --watch",
-    "coverage": "c8 --reporter=html --all --include=src/** --exclude=src/firebase/** --exclude=src/**/*.test.ts ava",
+    "coverage": "c8 ava",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\""
   },
   "dependencies": {
-    "@vitejs/plugin-react": "^3.1.0",
     "dot-prop": "^6.0.1",
     "evergreen-ui": "^7.1.4",
     "firebase": "^8.2.9",
@@ -20,12 +19,16 @@
     "vite": "^4.2.0"
   },
   "devDependencies": {
-    "@testing-library/react": "^11.0.0",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
+    "@vitejs/plugin-react": "^3.1.0",
     "@web/test-runner": "^0.12.0",
     "ava": "^5.2.0",
     "c8": "^7.13.0",
+    "global-jsdom": "^8.7.0",
+    "jsdom": "^21.1.1",
     "prettier": "^2.8.4",
     "prettier-plugin-organize-imports": "^3.2.2",
     "tsx": "^3.12.6",
@@ -43,6 +46,24 @@
       "--no-warnings",
       "--loader=tsx",
       "--experimental-specifier-resolution=node"
+    ],
+    "require": [
+      "global-jsdom/register"
+    ]
+  },
+  "c8": {
+    "all": true,
+    "include": "src/**",
+    "exclude": [
+      "src/index.tsx",
+      "src/App.tsx",
+      "src/firebase/**",
+      "src/**/index.ts",
+      "src/**/*.test.{ts,tsx}",
+      "src/**/*.d.ts"
+    ],
+    "reporter": [
+      "html"
     ]
   },
   "type": "module"
