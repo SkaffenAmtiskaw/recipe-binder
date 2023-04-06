@@ -33,9 +33,13 @@ const ListInput: FunctionComponent<Props> = ({
     }
   }, []);
 
-  const handleChange = useCallback((index: number) => (e: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    onChange(replace(value, e.currentTarget.value, index));
-  }, [onChange]);
+  const handleChange = useCallback(
+    (index: number) =>
+      (e: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        onChange(replace(value, e.currentTarget.value, index));
+      },
+    [onChange],
+  );
 
   return (
     <Pane marginBottom={majorScale(2)}>

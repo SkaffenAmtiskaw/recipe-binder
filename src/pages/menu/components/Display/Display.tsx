@@ -9,9 +9,9 @@ import {
 } from 'evergreen-ui';
 import { Link } from 'react-router-dom';
 
-import weekdayFormat from './weekdayFormat';
+import { getWeekday } from '../../utils';
 
-import type { Day, Dish } from './Menu';
+import type { Day, Dish } from '../../types';
 
 type Props = {
   date: Date;
@@ -39,7 +39,7 @@ const Display = ({ date, menu, onEdit }: Props) => {
   return (
     <Pane display="flex" flexDirection="column">
       {menu.map((value, index) => {
-        const weekday = weekdayFormat.format(
+        const weekday = getWeekday.format(
           new Date(date).setDate(date.getDate() + index),
         );
 
