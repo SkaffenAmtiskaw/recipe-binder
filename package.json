@@ -13,16 +13,16 @@
     "firebase": "^8.2.9",
     "klona": "^2.0.5",
     "param-case": "^3.0.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "react-router-dom": "^6.9.0",
     "vite": "^4.2.0"
   },
   "devDependencies": {
-    "@testing-library/react": "^14.0.0",
+    "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.4.3",
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
     "@vitejs/plugin-react": "^3.1.0",
     "@web/test-runner": "^0.12.0",
     "ava": "^5.2.0",
@@ -35,6 +35,8 @@
     "typescript": "^5.0.2"
   },
   "ava": {
+    "workerThreads": false,
+    "timeout": "80s",
     "files": [
       "src/**/*.test.{ts,tsx}"
     ],
@@ -43,9 +45,7 @@
       "tsx": "module"
     },
     "nodeArguments": [
-      "--no-warnings",
-      "--loader=tsx",
-      "--experimental-specifier-resolution=node"
+      "--import=tsx"
     ],
     "require": [
       "global-jsdom/register"
