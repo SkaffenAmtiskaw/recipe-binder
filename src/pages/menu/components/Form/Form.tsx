@@ -15,11 +15,11 @@ import type { FormEvent, KeyboardEvent } from 'react';
 
 import dotProp from 'dot-prop';
 
-import replace from '../../utils/replace';
+import replace from '@utils/replace';
 
-import weekdayFormat from './weekdayFormat';
+import { getWeekday } from '../../utils';
 
-import type { Day } from './Menu';
+import type { Day } from '../../types';
 
 type KeyDownEvent =
   | KeyboardEvent<HTMLInputElement>
@@ -75,14 +75,14 @@ const Form = ({ date, menu, onCancel, onDelete, onSubmit }: Props) => {
     <Pane display="flex" flexDirection="column">
       {data.map((value, weekday) => (
         <Pane
-          key={weekdayFormat.format(
+          key={getWeekday.format(
             new Date(date).setDate(date.getDate() + weekday),
           )}
           marginBottom={majorScale(1)}
         >
           <Pane background="tint1" padding={majorScale(1)} width="100%">
             <Heading size={400}>
-              {weekdayFormat.format(
+              {getWeekday.format(
                 new Date(date).setDate(date.getDate() + weekday),
               )}
             </Heading>

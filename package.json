@@ -3,43 +3,67 @@
     "start": "vite",
     "build": "tsc && vite build",
     "test": "ava --watch",
+    "coverage": "c8 ava",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\""
   },
   "dependencies": {
-    "@vitejs/plugin-react": "^3.1.0",
     "dot-prop": "^6.0.1",
     "evergreen-ui": "^7.1.4",
     "firebase": "^8.2.9",
     "klona": "^2.0.5",
     "param-case": "^3.0.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "react-router-dom": "^6.9.0",
     "vite": "^4.2.0"
   },
   "devDependencies": {
-    "@testing-library/react": "^11.0.0",
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^3.1.0",
     "@web/test-runner": "^0.12.0",
     "ava": "^5.2.0",
+    "c8": "^7.13.0",
+    "global-jsdom": "^8.7.0",
+    "jsdom": "^21.1.1",
     "prettier": "^2.8.4",
     "prettier-plugin-organize-imports": "^3.2.2",
-    "ts-node": "^10.9.1",
+    "tsx": "^3.12.6",
     "typescript": "^5.0.2"
   },
   "ava": {
+    "workerThreads": false,
+    "timeout": "80s",
     "files": [
-      "src/**/*.test.ts"
+      "src/**/*.test.{ts,tsx}"
     ],
     "extensions": {
-      "ts": "module"
+      "ts": "module",
+      "tsx": "module"
     },
     "nodeArguments": [
-      "--no-warnings",
-      "--loader=ts-node/esm",
-      "--experimental-specifier-resolution=node"
+      "--import=tsx"
+    ],
+    "require": [
+      "global-jsdom/register"
+    ]
+  },
+  "c8": {
+    "all": true,
+    "include": "src/**",
+    "exclude": [
+      "src/index.tsx",
+      "src/App.tsx",
+      "src/firebase/**",
+      "src/**/index.ts",
+      "src/**/*.test.{ts,tsx}",
+      "src/**/*.d.ts"
+    ],
+    "reporter": [
+      "html"
     ]
   },
   "type": "module"

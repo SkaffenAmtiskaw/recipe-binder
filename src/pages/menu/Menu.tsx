@@ -14,49 +14,23 @@ import {
 
 import db from '@firebase/db';
 
-import Display from './Display';
-import Form from './Form';
+import { Display, Form } from './components';
+
+import {
+  getISODate,
+  getNextWeek,
+  getPreviousWeek,
+  getStartOfWeek,
+} from './utils';
 
 import { Layout } from '../../components';
 
-export type Dish = {
-  name: string;
-  source?: string;
-  note?: string;
-};
-
-export type Meal = {
-  food: Dish[];
-  title: string;
-  subtitle?: string;
-};
-
-export type Day = {
-  meals: Meal[];
-  note?: string;
-};
+import type { Day } from './types';
 
 type Props = {
   user: string;
   menus: Record<string, Day[]>;
 };
-
-const getMonday = (date: Date) => {
-  const day = date.getDay();
-
-  const diff = date.getDate() - day + (day === 0 ? -6 : 1);
-
-  return new Date(date.setDate(diff));
-};
-
-const getISODate = (date: Date) =>
-  `${date.getFullYear()}-${`0${date.getMonth() + 1}`.slice(
-    -2,
-  )}-${`0${date.getDate()}`.slice(-2)}`;
-
-const goForward = (date: Date) => new Date(date.setDate(date.getDate() + 7));
-
-const goBack = (date: Date) => new Date(date.setDate(date.getDate() - 7));
 
 const Menu = ({ menus, user }: Props) => {
   const navigate = useNavigate();
@@ -64,7 +38,7 @@ const Menu = ({ menus, user }: Props) => {
   const { date: params } = useParams<{ date?: string }>();
 
   const [date, setDate] = useState(
-    getMonday(params ? new Date(`${params}T00:00`) : new Date()),
+    getStartOfWeek(params ? new Date(`${params}T00:00`) : new Date()),
   );
 
   const [edit, setEdit] = useState(false);
@@ -106,7 +80,7 @@ const Menu = ({ menus, user }: Props) => {
           <IconButton
             appearance="minimal"
             icon={ChevronLeftIcon}
-            onClick={() => setDate(goBack(date))}
+            onClick={() => setDate(getPreviousWeek(date))}
           />
           <Heading size={400}>
             Week of {new Intl.DateTimeFormat('en-us').format(date)}
@@ -114,7 +88,7 @@ const Menu = ({ menus, user }: Props) => {
           <IconButton
             appearance="minimal"
             icon={ChevronRightIcon}
-            onClick={() => setDate(goForward(date))}
+            onClick={() => setDate(getNextWeek(date))}
           />
         </Pane>
       </Pane>
