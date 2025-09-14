@@ -1,0 +1,25 @@
+{
+  "name": "recipe-binder-api",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "dev": "nodemon index.js"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.13.1",
+  "dependencies": {
+    "express": "^5.1.0",
+    "mongoose": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/mongoose": "^5.11.97",
+    "nodemon": "^3.1.10",
+    "tsx": "^3.14.0",
+    "typescript": "^5.8.3"
+  }
+}

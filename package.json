@@ -6,5 +6,8 @@
   ],
   "scripts": {
     "build": "pnpm --filter recipe-binder-client build"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.8"
   }
 }

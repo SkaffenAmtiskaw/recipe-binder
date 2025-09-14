@@ -1,0 +1,36 @@
+[
+  {
+    "id": "sample-recipe",
+    "time": {
+      "prep": "5 minutes",
+      "total": "10 minutes",
+      "actual": "20 minutes",
+      "cook": "30 minutes"
+    },
+    "servings": 4,
+    "instructions": ["Step 1", "Step 2", "Step 3", "Step 4"],
+    "notes": "This is some notes",
+    "source": { "url": "www.recipes.com/this", "name": "recipe website" },
+    "storage": "store in dirt",
+    "tags": ["tag1", "tag2", "tag3"],
+    "title": "This is a recipe",
+    "ingredients": ["100lb chicken", "100lb beef", "100lb veal", "1tsp oragano"]
+  },
+  {
+    "id": "sample-recipe",
+    "time": {
+      "prep": "5 minutes",
+      "total": "10 minutes",
+      "actual": "20 minutes",
+      "cook": "30 minutes"
+    },
+    "servings": 4,
+    "instructions": ["Step 1", "Step 2", "Step 3", "Step 4"],
+    "notes": "This is some notes",
+    "source": { "url": "www.recipes.com/this", "name": "recipe website" },
+    "storage": "store in dirt",
+    "tags": ["tag1", "tag2", "tag3"],
+    "title": "This is a recipe",
+    "ingredients": ["100lb chicken", "100lb beef", "100lb veal", "1tsp oragano"]
+  }
+]
